@@ -1,5 +1,6 @@
 import api from '../../api/imgur';
 import qs from 'qs';
+import { router } from '../../main';
 
 
 const state = {
@@ -17,8 +18,11 @@ const actions = {
     finalizeLogin({ commit }, hash) {
         // pass in query string
         const query = qs.parse(hash.replace('#', ''));
+        // everything done for authentication
         commit('setToken', query.access_token);
         window.localStorage.setItem('imgur_token', query.access_token);
+        // routing to root
+        router.push('/');
     },
     // do not call mutations directly just call commit function
     logout: ({ commit }) => {

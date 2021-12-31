@@ -1,15 +1,15 @@
 <template>
   <div class="ui secondary pointing menu">
-    <a href="/" class="item active">Image Storage</a>
+    <router-link to="/" class="item active">Image Storage</router-link>
     <!-- just name of computed property -->
     <div class="right menu">
       <div v-if="isLoggedIn" class="horizontal">
-        <a class="item">Galleries</a>
-        <a class="item">Upload</a>
+        <router-link to="/" class="item">Galleries</router-link>
+        <router-link to="/upload" class="item">Upload</router-link>
         <a class="item" @click="logout">Logout</a>
       </div>
       <!-- v-else should come directly after v-if -->
-      <a v-else  href="#" class="ui item" @click="login">Login</a>
+      <a v-else href="#" class="ui item" @click="login">Login</a>
     </div>
   </div>
 </template>
