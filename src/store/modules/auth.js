@@ -3,7 +3,7 @@ import qs from 'qs';
 
 
 const state = {
-    token: null
+    token: window.localStorage.getItem('imgur_token')
 };
 
 const getters = {
@@ -18,11 +18,13 @@ const actions = {
         // pass in query string
         const query = qs.parse(hash.replace('#', ''));
         commit('setToken', query.access_token);
+        window.localStorage.setItem('imgur_token', query.access_token);
     },
     // do not call mutations directly just call commit function
     logout: ({ commit }) => {
         // call setToken from mutations
         commit('setToken', null);
+        window.localStorage.removeItem('imgur_token');
     }
 };
 
