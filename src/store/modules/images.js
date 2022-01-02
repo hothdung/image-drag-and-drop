@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import api from '../../api/imgur';
 
 const state = {
@@ -15,6 +16,10 @@ const actions = {
         const response = await api.fetchImages(token);
         // first data is attached by axios
         commit('setImages', response.data.data);
+    },
+    async uploadImages({ commit }, images) {
+        // do not work with whole event object
+        console.log(images);
     }
 };
 
