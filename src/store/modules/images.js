@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import api from '../../api/imgur';
+import { router } from '../../main';
 
 const state = {
     images: []
@@ -17,9 +18,19 @@ const actions = {
         // first data is attached by axios
         commit('setImages', response.data.data);
     },
-    async uploadImages({ commit }, images) {
+    async uploadImages({ rootState }, images) {
         // do not work with whole event object
-        console.log(images);
+
+        // Get access token
+        const { token } = rootState.auth;
+
+        // Call our API to do upload: imgur file
+
+        await api.uploadImages(images, token);
+
+        // redirect our user to ImageList component: list of images
+        router.push('/');
+
     }
 };
 

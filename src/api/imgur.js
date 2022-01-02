@@ -20,5 +20,21 @@ export default {
                 Authorization: `Bearer ${token}`
             }
         })
+    },
+    uploadImages(images, token) {
+        // imgur api just upload images one at a time thats why looping over list
+        // array of promises --> each represents image upload
+        const promises = Array.from(images).map(image => {
+            const formData = new FormData();
+            formData.append('image', image);
+            return axios.post(`${ROOT_URL}/3/image`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        })
+        // waits for every promise to be resolved before we are done
+        // takes array of promises --> when all promises are resolved --> Promise.all will be resolved, as well & function will continue
+        return Promise.all(promises);
     }
 }
